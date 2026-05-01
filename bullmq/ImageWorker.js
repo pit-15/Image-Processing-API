@@ -15,7 +15,8 @@ const worker = new Worker("image_processing",async(job)=>
         const outputPath = path.join("compressed",`compressed-${imageName}`);
         
         await sharp(filePath).resize(800).jpeg({quality:60}).toFile(outputPath);
-        console.log(`✅ Image compressed: ${outputPath}`);
+        
+        console.log(`Image compressed: ${outputPath}`);
     }   
     catch(err){
         console.error("Error processing image",err);
