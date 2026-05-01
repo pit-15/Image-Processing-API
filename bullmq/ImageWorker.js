@@ -2,6 +2,7 @@ import { Worker } from "bullmq";
 import redis from "./config/redis.js";
 import sharp from "sharp";
 import path from "path";
+import fs from "fs"
 
 const worker = new Worker("image_processing",async(job)=> 
 {
@@ -9,14 +10,15 @@ const worker = new Worker("image_processing",async(job)=>
     {
         const {filePath,imageName} = job.data; 
 
-        const filePath = image.path
+        fs.mkdirSync("compressed",{recursive:true});
+
         const outputPath = path.join("compressed",`compressed-${imageName}`);
         
         await sharp(filePath).resize(800).jpeg({quality:60}).toFile(outputPath);
-        console.log("Image compressed")
+        console.log(`✅ Image compressed: ${outputPath}`);
     }   
     catch(err){
-        console.error("Error processing image");
+        console.error("Error processing image",err);
         throw err;
     } 
     
