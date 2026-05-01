@@ -7,7 +7,7 @@ const worker = new Worker("image_processing",async(job)=>
 {
     try                                                             
     {
-        const {image,imageName} = job.data; 
+        const {filePath,imageName} = job.data; 
 
         const filePath = image.path
         const outputPath = path.join("compressed",`compressed-${imageName}`);
@@ -23,3 +23,4 @@ const worker = new Worker("image_processing",async(job)=>
 },{
         connection:redis   
     })
+export default worker;
