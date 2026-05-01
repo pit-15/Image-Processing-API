@@ -10,7 +10,8 @@ res.send("Sever running successfully");
 })
 
 
-app.listen(1001,()=>
+const PORT= process.env.PORT;
+app.listen(PORT,()=>
 {
     console.log("Server Listening on port 1001");
 })  

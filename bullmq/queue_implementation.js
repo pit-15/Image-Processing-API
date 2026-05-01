@@ -1,11 +1,8 @@
-import Redis from "ioredis";
+import { Queue} from "bullmq";
+import redis from "./config/redis";
 import dotenv from "dotenv";
 dotenv.config();
 
-const connection = new Redis(process.env.REDIS_URL,
-    {
-        maxRetriesPerRequest:null,  
-        enableReadyCheck:false 
-    }       
-)
+const queue = new Queue("image_processing",{connection:redis});
 
+export default queue;
