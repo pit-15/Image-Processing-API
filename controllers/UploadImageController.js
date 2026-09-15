@@ -1,4 +1,4 @@
-import queue from "../bullmq/queue_implementations.js";
+import queue from "../bullmq/queue_implementation.js"
 
 export const uploadImage = async (req,res)=>
 {
